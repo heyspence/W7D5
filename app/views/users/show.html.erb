@@ -2,5 +2,15 @@
 
 <ul>
     <li><%= @user.email %></li>
- </ul>
+</ul>
+
+<% if @user.subs %>
+    <h2>Subs</h2>
+        <ul>
+            <% @user.subs.each do |sub| %>
+                <li><a href="<%= sub_url(sub) %>"><%= sub.title %></a></li>
+            <% end %>
+        </ul>
+<% end %>
 <a href="<%= users_url %>">View all users</a>
+

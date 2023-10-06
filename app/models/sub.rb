@@ -12,7 +12,7 @@
 class Sub < ApplicationRecord
     validates :title, :user_id, presence: true
 
-    belongs_to :moderator
-        foreign_key: :user_id
+    belongs_to :moderator,
+        foreign_key: :user_id,
         class_name: :User
 end

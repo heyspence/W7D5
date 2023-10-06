@@ -5,3 +5,7 @@
         <a href="<%= user_url(user) %>"><%= user.email %></a>
     <% end %>
 <% end %>
+
+<form method="GET" action="<%= new_user_url %>">
+    <input type="submit" value="Create New User">
+</form>

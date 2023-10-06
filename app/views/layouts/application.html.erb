@@ -9,28 +9,51 @@
     <%= stylesheet_link_tag "application" %>
   </head>
 
-  <% if logged_in? %>
-    <form method="POST" action="<%= session_url %>">
-      <input type="hidden" name="_method" value="DELETE">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <input type="submit" value="Logout">
-    </form>
-  <% end %>
+  <header>
+    <div class="header-left">
+      <img src="/assets/reddit-logo (1).png">
+      <h1>Reddit</h1>
+    </div>
 
-  <% unless logged_in? || current_page?(new_session_url) %>
-    <form method="GET" action="<%= new_session_url %>">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <input type="submit" value="Login">
-    </form>
-  <% end %>
+    <div class="header-middle">
+      <% unless logged_in? || current_page?(new_session_url) %>
+        <form method="GET" action="<%= new_session_url %>">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="submit" value="Login">
+        </form>
+      <% end %>
 
 
-  <% unless logged_in? || current_page?(new_user_url) %>
-    <form method="GET" action="<%= new_user_url %>">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <input type="submit" value="Sign Up">
-    </form>
-  <% end %>
+      <% unless logged_in? || current_page?(new_user_url) %>
+        <form method="GET" action="<%= new_user_url %>">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="submit" value="Sign Up">
+        </form>
+      <% end %>
+
+      <% unless !logged_in? || current_page?(subs_url) %>
+        <form method="GET" action="<%= subs_url %>">
+          <input type="submit" value="View All Subs">
+        </form>
+      <% end %>
+
+      <% unless !logged_in? || current_page?(users_url) %>
+        <form method="GET" action="<%= users_url %>">
+          <input type="submit" value="View All Users">
+        </form>
+      <% end %>
+    </div>
+    
+    <div class="header-right">
+      <% if logged_in? %>
+        <form method="POST" action="<%= session_url %>">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="submit" value="Logout">
+        </form>
+      <% end %>
+    </div>
+  </header>
 
   <body>
     <%= yield %>

@@ -1,0 +1,14 @@
+<h1><%= @sub.title.capitalize %></h1>
+
+<ul>
+    <% if @sub.moderator %>
+        <li>Moderator: <%= @sub.moderator.email %></li>
+    <% end %>
+    <li>Description: <%= @sub.description %></li>
+    
+    <li>** Posts Here**</li>
+</ul>
+
+<form method="GET" action="<%= edit_sub_url(@sub) %>">
+    <input type="submit" value="Edit Sub">
+</form>

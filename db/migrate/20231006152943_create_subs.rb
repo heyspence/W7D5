@@ -6,7 +6,7 @@ class CreateSubs < ActiveRecord::Migration[7.0]
       t.integer :user_id, null: false
       t.timestamps
     end
-    add_index :subs, :user_id, unique: true
+    add_index :subs, :user_id
     add_foreign_key :subs, :users, column: :user_id
   end
 end

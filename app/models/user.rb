@@ -19,6 +19,10 @@ class User < ApplicationRecord
 
     attr_reader :password
 
+    has_many :subs,
+        class_name: :Sub,
+        inverse_of: :moderator
+
     def self.find_by_credentials(email, password)
         user = User.find_by(email: email)
         if user&.is_password?(password)
