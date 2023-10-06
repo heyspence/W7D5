@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RedditClone</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application" %>
+  </head>
+
+  <% if logged_in? %>
+    <form method="POST" action="<%= session_url %>">
+      <input type="hidden" name="_method" value="DELETE">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="submit" value="Logout">
+    </form>
+  <% end %>
+
+  <% unless logged_in? || current_page?(new_session_url) %>
+    <form method="GET" action="<%= new_session_url %>">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="submit" value="Login">
+    </form>
+  <% end %>
+
+
+  <% unless logged_in? || current_page?(new_user_url) %>
+    <form method="GET" action="<%= new_user_url %>">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="submit" value="Sign Up">
+    </form>
+  <% end %>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>
